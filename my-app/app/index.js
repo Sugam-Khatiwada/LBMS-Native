@@ -1,9 +1,15 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, Text, TouchableOpacity, ImageBackground, Image, useWindowDimensions } from 'react-native';
 import { useRouter } from 'expo-router';
  
 export default function WelcomePage() {
   const router = useRouter();
+  const { width } = useWindowDimensions();
+
+  // responsive sizes
+  const imageSize = Math.min(140, Math.max(72, Math.floor(width * 0.18)));
+  const titleFontSize = width > 900 ? 40 : width > 600 ? 32 : 22;
+  const subtitleFontSize = width > 600 ? 18 : 14;
 
   const handleGetStarted = () => {
     router.push('/login');
@@ -19,33 +25,43 @@ export default function WelcomePage() {
     >
       {/* Dark overlay for better text readability */}
       <View className="absolute inset-0 bg-black/50" />
-      <View className="z-10 items-center px-8">
-        <Text className="text-white text-4xl font-bold text-center mb-4">
-          Welcome to Library Management System
-        </Text>
-        <Text className="text-white/90 text-lg text-center mb-8 leading-6">
-          Manage catalog, members, loans and reports from one place
+      <View className="z-10 items-center px-6" style={{ width: '100%', maxWidth: 900 }}>
+        <View style={{ width: imageSize + 28, height: imageSize + 28, borderRadius: (imageSize + 28) / 2, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center', marginBottom: 14 }}>
+          <Image source={require('../assets/icon.png')} style={{ width: Math.floor(imageSize * 0.7), height: Math.floor(imageSize * 0.7), borderRadius: 12 }} />
+        </View>
+
+        <Text className="text-white font-bold text-center mb-3" style={{ fontSize: titleFontSize }}>
+          Welcome to Bookhub Library
         </Text>
 
-        <TouchableOpacity
-          onPress={handleGetStarted}
-          className="bg-yellow-600 px-8 py-4 rounded-lg shadow-lg"
-          activeOpacity={0.8}
-        >
-          <Text className="text-white text-lg font-semibold">Enter Library</Text>
-        </TouchableOpacity>
+        <Text className="text-white/90 text-center mb-6" style={{ fontSize: subtitleFontSize, lineHeight: subtitleFontSize * 1.4, maxWidth: 760 }}>
+          A simple, delightful library management experience — catalog books, manage members, track loans and generate reports from one place.
+        </Text>
 
-        <View className="mt-8 items-center">
-          <Text className="text-white/80 text-sm">Quick features</Text>
-          <View className="flex-row gap-4 mt-3">
-            <View className="bg-white/20 px-3 py-2 rounded-full">
-              <Text className="text-white">🔎 Catalog Search</Text>
+        <View className="flex-row items-center">
+          <TouchableOpacity onPress={handleGetStarted} className="bg-purple-600 px-6 py-3 rounded-lg shadow-lg" activeOpacity={0.85}>
+            <Text className="text-white font-semibold">Get Started</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View className="mt-8 w-full">
+          <Text className="text-white/80 text-sm text-center mb-3">Key features</Text>
+          <View className="flex-row flex-wrap justify-center gap-3">
+            <View className="bg-white/10 px-4 py-3 rounded-xl w-[44%] items-center" style={{ minWidth: 140 }}>
+              <Text className="text-white text-lg">🔎</Text>
+              <Text className="text-white/90 mt-2 text-center">Smart Catalog Search</Text>
             </View>
-            <View className="bg-white/20 px-3 py-2 rounded-full">
-              <Text className="text-white">📚 Manage Books</Text>
+            <View className="bg-white/10 px-4 py-3 rounded-xl w-[44%] items-center" style={{ minWidth: 140 }}>
+              <Text className="text-white text-lg">📚</Text>
+              <Text className="text-white/90 mt-2 text-center">Manage Books</Text>
             </View>
-            <View className="bg-white/20 px-3 py-2 rounded-full">
-              <Text className="text-white">👥 Members</Text>
+            <View className="bg-white/10 px-4 py-3 rounded-xl w-[44%] items-center" style={{ minWidth: 140 }}>
+              <Text className="text-white text-lg">👥</Text>
+              <Text className="text-white/90 mt-2 text-center">Members</Text>
+            </View>
+            <View className="bg-white/10 px-4 py-3 rounded-xl w-[44%] items-center" style={{ minWidth: 140 }}>
+              <Text className="text-white text-lg">📈</Text>
+              <Text className="text-white/90 mt-2 text-center">Reports</Text>
             </View>
           </View>
         </View>

@@ -72,7 +72,7 @@ export default function LoginPage() {
       showToast("Attempting login...", "info", 2000);
 
       const response = await axios.post(
-        "https://library-management-system-boo3.onrender.com/api/login",
+        "https://librarymanagementsystem-48c3.onrender.com/api/login",
         { email, password },
         { timeout: 10000 }
       );
@@ -140,7 +140,7 @@ export default function LoginPage() {
         )}
         <View className="bg-white rounded-2xl p-8 shadow-lg">
           <Text className="text-3xl font-bold text-gray-800 text-center mb-2">
-            Welcome to Library Management System
+            Welcome to Bookhub Library
           </Text>
           <Text className="text-gray-600 text-center mb-8">Sign in to manage the library</Text>
           <View className="mb-6">
@@ -166,19 +166,17 @@ export default function LoginPage() {
           </View>
           <TouchableOpacity
             onPress={handleLogin}
-            className="bg-blue-600 py-4 rounded-lg shadow-md mb-4"
+            className="bg-purple-600 py-4 rounded-lg shadow-md mb-4"
             activeOpacity={0.8}
           >
-            <Text className="text-white text-lg font-semibold text-center">
-              Login
-            </Text>
+            <Text className="text-white text-lg font-semibold text-center">Login</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => router.back()}
             className="py-2"
             activeOpacity={0.7}
           >
-            <Text className="text-blue-600 text-center">Back to Welcome</Text>
+            <Text className="text-purple-600 text-center">Back to Welcome</Text>
           </TouchableOpacity>
         </View>
       </View>
